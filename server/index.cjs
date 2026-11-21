@@ -1,12 +1,40 @@
 const express = require("express");
 const pool = require("./src/db.cjs");
+const session = require("express-session");
+const PgSessionStore = require("connect-pg-simple")(session);
 const authRoutes = require("./src/routes/auth.cjs");
-
-
+const usersRoutes = require("./src/routes/users.cjs");
+const groupsRoutes = require("./src/routes/groups.cjs");
+const invitesRoutes = require("./src/routes/invites.cjs");
+const roundsRoutes = require("./src/routes/rounds.cjs");
 const app = express();
 
 app.use(express.json());
+if (!process.env.SESSION_SECRET) {
+  throw new Error("SESSION_SECRET is missing. Check server/.env");
+}
+
+app.use(
+  session({
+    name: "trio.sid",
+    secret: process.env.SESSION_SECRET,
+    store: new PgSessionStore({ pool }),
+    resave: false,
+    saveUninitialized: false,
+    rolling: true,
+    cookie: {
+      maxAge: 15 * 60 * 1000,
+      httpOnly: true,
+      sameSite: "lax",
+      secure: process.env.NODE_ENV === "production",
+    },
+  })
+);
 app.use("/api/auth", authRoutes);
+app.use("/api/users", usersRoutes);
+app.use("/api/groups", groupsRoutes);
+app.use("/api/invites", invitesRoutes);
+app.use("/api/rounds", roundsRoutes);
 
 app.get("/api/health", async (req, res) => {
   try {

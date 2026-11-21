@@ -17,3 +17,31 @@ async function registerUser({ displayName, email, password }) {
 }
 
 module.exports = { registerUser };
+async function verifyLogin(email, password) {
+  const result = await pool.query(
+    `SELECT id, display_name, email, password_hash
+     FROM public.users
+     WHERE lower(btrim(email)) = $1`,
+    [email.trim().toLowerCase()]
+  );
+
+  const user = result.rows[0];
+
+  if (!user || !user.password_hash) {
+    return null;
+  }
+
+  const passwordMatches = await argon2.verify(user.password_hash, password);
+
+  if (!passwordMatches) {
+    return null;
+  }
+
+  return {
+    id: user.id,
+    displayName: user.display_name,
+    email: user.email,
+  };
+}
+
+module.exports.verifyLogin = verifyLogin;

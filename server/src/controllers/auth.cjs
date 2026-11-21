@@ -29,3 +29,58 @@ async function register(req, res, next) {
 }
 
 module.exports = { register };
+const loginBody = z.object({
+  email: z.string().trim().email(),
+  password: z.string().min(1),
+});
+
+async function login(req, res) {
+  const input = loginBody.safeParse(req.body);
+
+  if (!input.success) {
+    return res.status(400).json({
+      error: "Enter an email address and password.",
+    });
+  }
+
+  const { email, password } = input.data;
+  const user = await require("../services/auth.cjs").verifyLogin(email, password);
+
+  if (!user) {
+    return res.status(401).json({
+      error: "Email or password is incorrect.",
+    });
+  }
+
+  await new Promise((resolve, reject) => {
+    req.session.regenerate((err) => err ? reject(err) : resolve());
+  });
+
+  req.session.userId = user.id;
+
+  await new Promise((resolve, reject) => {
+    req.session.save((err) => err ? reject(err) : resolve());
+  });
+
+  return res.status(200).json({ user });
+}
+
+module.exports.login = login;
+function logout(req, res, next) {
+  req.session.destroy((error) => {
+    if (error) {
+      return next(error);
+    }
+
+    res.clearCookie("trio.sid", {
+      path: "/",
+      httpOnly: true,
+      sameSite: "lax",
+      secure: process.env.NODE_ENV === "production",
+    });
+
+    return res.status(204).end();
+  });
+}
+
+module.exports.logout = logout;
