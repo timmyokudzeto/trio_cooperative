@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "test:backend": "PGDATABASE=trio_test node --env-file=.env --test src/domain/*.test.cjs test/*.test.cjs test/payout.integration.cjs"
+    "test:backend": "PGDATABASE=trio_test node --env-file=.env --test src/domain/*.test.cjs test/*.test.cjs test/payout.integration.cjs",
+    "start": "node index.cjs"
   },
   "keywords": [],
   "author": "",

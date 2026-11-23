@@ -55,6 +55,7 @@ app.use((error, req, res, next) => {
   console.error(error.message);
   return res.status(500).json({ error: "Unexpected server error" });
 });
-app.listen(3000, "127.0.0.1", () => {
-  console.log("Trio API running at http://127.0.0.1:3000");
+const port = Number(process.env.PORT) || 3000;
+app.listen(port, "0.0.0.0", () => {
+    console.log(`Trio API listening on port ${port}`);
 });
