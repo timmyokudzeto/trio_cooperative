@@ -48,7 +48,28 @@ async function listGroupsForUser(userId) {
 
 async function findGroupForUser(groupId, userId) {
   const result = await pool.query(
-    `SELECT g.id, g.name, m.role
+    `SELECT g.id, g.name, m.role,
+            (
+              SELECT r.id
+              FROM public.rounds AS r
+              JOIN public.cycles AS c ON c.id = r.cycle_id
+              WHERE r.group_id = g.id
+                AND c.status = 'active'
+                AND NOT EXISTS (
+                  SELECT 1
+                  FROM public.payouts AS p
+                  WHERE p.round_id = r.id
+                )
+              ORDER BY r.payout_position
+              LIMIT 1
+            ) AS current_round_id,
+  (
+    SELECT c.id
+    FROM public.cycles AS c
+    WHERE c.group_id = g.id
+    ORDER BY c.id DESC
+    LIMIT 1
+  ) AS latest_cycle_id
      FROM public.memberships AS m
      JOIN public.groups AS g ON g.id = m.group_id
      WHERE m.user_id = $1

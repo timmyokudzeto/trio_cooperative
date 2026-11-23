@@ -1,7 +1,7 @@
 /* Components */
 
 import { Button } from "@/components/ui/button";
-import { Sidebar } from "@/components/ui/sidebar";
+
 
 function App() {
   return (

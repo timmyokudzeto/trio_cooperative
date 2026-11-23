@@ -1,0 +1,82 @@
+#root:has(.trio){width:100%;max-width:none;padding:0;margin:0;text-align:left}
+body:has(.trio){display:block;margin:0}
+.trio{--pine:#193e2d;--paper:#f6f4ee;--line:#dfe3db;--muted:#646a61;background:var(--paper);color:#242821;min-height:100dvh;font:16px/1.5 "DM Sans",system-ui,sans-serif;color-scheme:light}
+.trio *{box-sizing:border-box}
+.trio button{font:inherit;cursor:pointer;color:inherit;background:transparent;border:0}
+.trio button:focus-visible,.trio input:focus-visible{outline:3px solid #ad7223;outline-offset:3px}
+.trio button:disabled{cursor:default;opacity:.68}
+.trio .top{position:sticky;top:0;z-index:3;background:#fff;border-bottom:1px solid var(--line)}
+.trio .bar,.trio .wrap{max-width:1220px;margin:auto;padding:0 clamp(16px,4vw,52px)}
+.trio .bar{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:72px}
+.trio .brand,.trio h1,.trio h2,.trio .amount{font-family:"DM Serif Text",Georgia,serif;font-weight:bold}
+.trio .brand,.trio .heading,.trio .title,.trio .account,.trio .panelHead,.trio .paid{display:flex;align-items:center;gap:12px}
+.trio .brand{font-size:27px;color:var(--pine)}
+.trio .mark{flex:none;display:inline-block;width:36px;height:36px;border-radius:50%;background:radial-gradient(circle at 39% 51%,#fff 0 7%,transparent 9%),radial-gradient(circle at 57% 43%,#bfccbd 0 8%,transparent 10%),radial-gradient(circle at 57% 62%,#829f8d 0 7%,transparent 9%),var(--pine)}
+.trio .mark.big{width:62px;height:62px;border-radius:18px}
+.trio .bar button,.trio .pill,.trio .tick{background:#e7efe7;color:var(--pine);border-radius:100px;padding:6px 14px;font-weight:600}
+.trio .wrap{padding-top:clamp(28px,4vw,54px);padding-bottom:64px}
+.trio h1,.trio h2,.trio p{margin:0}
+.trio h1{font-size:clamp(30px,4vw,46px);line-height:1.1;letter-spacing:-.045em}
+.trio h2{font-size:23px;letter-spacing:-.025em}
+.trio p,.trio dt,.trio .stop small{color:var(--muted)}
+.trio .title{flex-wrap:wrap;gap:8px}
+.trio .heading p{margin-top:6px}
+.trio .tabs{display:flex;gap:8px;border-bottom:1px solid var(--line);margin:26px 0;overflow-x:auto}
+.trio .tabs button{padding:12px clamp(5px,1.8vw,22px);color:var(--muted);border-bottom:3px solid transparent}
+.trio .tabs button[aria-current]{color:var(--pine);border-color:var(--pine);font-weight:700}
+.trio .pot,.trio .panel{border-radius:20px;box-shadow:0 2px 4px #16261c0b}
+.trio .pot{background:radial-gradient(circle at 98% 4%,#ffffff0e 0 100px,transparent 101px),radial-gradient(circle at 3% 110%,#ffffff0c 0 90px,transparent 91px),var(--pine);color:#fff;padding:clamp(22px,4vw,40px)}
+.trio .eyebrow{font:700 .75rem/1.5 system-ui,sans-serif;letter-spacing:.11em;text-transform:uppercase}
+.trio .pot .eyebrow,.trio .pot p,.trio .legend,.trio .amount span{color:#c4d2c8}
+.trio .amount{font-size:clamp(44px,6vw,76px);line-height:1.12;letter-spacing:-.06em;font-variant-numeric:lining-nums}
+.trio .amount span{font:500 clamp(17px,2.2vw,26px)/1.4 system-ui;letter-spacing:-.03em}
+.trio .legend,.trio .panelHead{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.trio .legend{margin-top:24px;font-size:14px}
+.trio progress{display:block;width:100%;height:10px;margin:8px 0 16px;overflow:hidden;appearance:none;border:0;border-radius:20px;background:#496454}
+.trio progress::-webkit-progress-bar{background:#496454}
+.trio progress::-webkit-progress-value{background:#e2a93d;border-radius:20px}
+.trio progress::-moz-progress-bar{background:#e2a93d}
+.trio .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.trio .panel{background:#fff;border:1px solid var(--line);padding:clamp(18px,2.5vw,30px);min-width:0}
+.trio .panel p{margin:10px 0}
+.trio .rotation,.trio h1+.grid{margin:20px 0}
+.trio .track{position:relative;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin:20px 0 4px}
+.trio .track:before{content:"";position:absolute;top:25px;left:16%;right:16%;height:2px;background:var(--line)}
+.trio .stop{position:relative;display:grid;justify-items:center;align-content:start;text-align:center;gap:2px}
+.trio .avatar{width:34px;height:34px;display:inline-grid;place-items:center;flex:none;border-radius:50%;background:#507b64;color:white;font:650 13px/1 system-ui}
+.trio .stop .avatar{width:52px;height:52px;font-size:19px;margin-bottom:8px}
+.trio .current .avatar{background:var(--pine);outline:4px solid #e6bd72}
+.trio .avatar.missing{background:#eaece6;color:#73766c}
+.trio .avatar.tone1{background:#785535}.trio .avatar.tone2{background:#635477}.trio .avatar.tone3{background:#366459}
+.trio .stack{display:flex;padding-left:6px}.trio .stack:empty{display:none}
+.trio .stack .avatar{border:2px solid var(--pine);margin-left:-6px}
+.trio .pill{font-size:12px;white-space:nowrap;padding:3px 10px}
+.trio .amber{background:#fff2d8;color:#805311}
+.trio dl,.trio ol,.trio ul{margin:18px 0;padding:0;list-style:none}
+.trio dl div{background:#f1efe8;border-radius:12px;margin:8px 0;padding:10px 14px}
+.trio dd{font-weight:650;margin:0}
+.trio li{display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--line);padding:12px 5px}
+.trio li small{margin-left:auto;text-align:right}
+.trio li.activeRow{border:0;border-radius:12px;background:var(--pine);color:white;padding-inline:12px}
+.trio .foot,.trio .primary{width:100%;border-radius:14px;padding:11px 16px;font-weight:650}
+.trio .foot{margin-top:12px;border:1px solid var(--line);color:var(--pine)}
+.trio .primary{background:var(--pine);color:white}
+.trio .foot:hover,.trio .circleLink:hover{background:#edf3ec}
+.trio .circleLink{display:flex;align-items:center;gap:16px;text-align:left;border:1px solid var(--line);background:white}.trio .circleLink span{margin-left:auto}
+.trio .signin{max-width:420px;margin:5vh auto}.trio .signin h1{margin-top:16px}
+.trio form label{display:block;font-weight:600;margin:18px 0}
+.trio input{display:block;width:100%;background:white;color:#222;border:1px solid #aeb8ac;border-radius:9px;padding:10px;font:inherit}
+.trio .notice{margin:16px 0;color:#893e1a}
+@media(max-width:680px){.trio .grid{grid-template-columns:1fr}.trio .bar{min-height:58px}.trio .account>span{display:none}.trio .heading{align-items:flex-start}.trio .mark.big{width:44px;height:44px;border-radius:12px}.trio .tabs{justify-content:space-between}.trio .stop small{font-size:11px}.trio .legend,.trio .paid{font-size:13px}}
+.trio .payout-action {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid #ffffff40;
+}
+
+.trio .payout-action .foot {
+  width: auto;
+  display: block;
+  background: #f6f4ee;
+  color: #193e2d;
+}
