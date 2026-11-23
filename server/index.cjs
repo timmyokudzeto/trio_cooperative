@@ -9,6 +9,9 @@ const invitesRoutes = require("./src/routes/invites.cjs");
 const roundsRoutes = require("./src/routes/rounds.cjs");
 const app = express();
 
+if (process.env.NODE_ENV === "production") {
+  app.set("trust proxy", 1);
+}
 app.use(express.json());
 if (!process.env.SESSION_SECRET) {
   throw new Error("SESSION_SECRET is missing. Check server/.env");
